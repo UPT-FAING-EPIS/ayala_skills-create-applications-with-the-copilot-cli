@@ -1,4 +1,4 @@
-const { add, subtract, multiply, divide } = require('../calculator');
+const { add, subtract, multiply, divide, modulo, power, squareRoot } = require('../calculator');
 
 describe('Calculator Functions', () => {
   
@@ -183,6 +183,143 @@ describe('Calculator Functions', () => {
 
     test('should multiply negative numbers with even count', () => {
       expect(multiply(-1, -2)).toBe(2);
+    });
+  });
+
+  // ============ MODULO TESTS ============
+  describe('modulo()', () => {
+    test('should modulo 5 % 2 = 1 (from image example)', () => {
+      expect(modulo(5, 2)).toBe(1);
+    });
+
+    test('should modulo two positive numbers', () => {
+      expect(modulo(10, 3)).toBe(1);
+    });
+
+    test('should modulo resulting in zero', () => {
+      expect(modulo(10, 5)).toBe(0);
+    });
+
+    test('should modulo with negative dividend', () => {
+      expect(modulo(-10, 3)).toBe(-1);
+    });
+
+    test('should modulo with negative divisor', () => {
+      expect(modulo(10, -3)).toBe(1);
+    });
+
+    test('should modulo with both negative', () => {
+      expect(modulo(-10, -3)).toBe(-1);
+    });
+
+    test('should modulo by 1', () => {
+      expect(modulo(5, 1)).toBe(0);
+    });
+
+    test('should throw error when modulo by zero', () => {
+      expect(() => modulo(10, 0)).toThrow('Modulo by zero is not allowed');
+    });
+
+    test('should modulo with decimal numbers', () => {
+      expect(modulo(5.5, 2)).toBeCloseTo(1.5, 5);
+    });
+
+    test('should modulo when dividend is smaller than divisor', () => {
+      expect(modulo(3, 10)).toBe(3);
+    });
+  });
+
+  // ============ POWER TESTS ============
+  describe('power()', () => {
+    test('should power 2 ^ 3 = 8 (from image example)', () => {
+      expect(power(2, 3)).toBe(8);
+    });
+
+    test('should power with positive base and exponent', () => {
+      expect(power(5, 2)).toBe(25);
+    });
+
+    test('should power with exponent of zero', () => {
+      expect(power(5, 0)).toBe(1);
+    });
+
+    test('should power with exponent of one', () => {
+      expect(power(5, 1)).toBe(5);
+    });
+
+    test('should power with base of zero', () => {
+      expect(power(0, 5)).toBe(0);
+    });
+
+    test('should power with negative base and even exponent', () => {
+      expect(power(-2, 2)).toBe(4);
+    });
+
+    test('should power with negative base and odd exponent', () => {
+      expect(power(-2, 3)).toBe(-8);
+    });
+
+    test('should power with negative exponent', () => {
+      expect(power(2, -2)).toBe(0.25);
+    });
+
+    test('should power with decimal base', () => {
+      expect(power(2.5, 2)).toBe(6.25);
+    });
+
+    test('should power with decimal exponent', () => {
+      expect(power(4, 0.5)).toBe(2);
+    });
+
+    test('should power with large exponent', () => {
+      expect(power(2, 10)).toBe(1024);
+    });
+  });
+
+  // ============ SQUARE ROOT TESTS ============
+  describe('squareRoot()', () => {
+    test('should square root of 16 = 4 (from image example)', () => {
+      expect(squareRoot(16)).toBe(4);
+    });
+
+    test('should square root of positive number', () => {
+      expect(squareRoot(25)).toBe(5);
+    });
+
+    test('should square root of zero', () => {
+      expect(squareRoot(0)).toBe(0);
+    });
+
+    test('should square root of one', () => {
+      expect(squareRoot(1)).toBe(1);
+    });
+
+    test('should square root resulting in decimal', () => {
+      expect(squareRoot(2)).toBeCloseTo(1.414, 3);
+    });
+
+    test('should square root of decimal number', () => {
+      expect(squareRoot(2.25)).toBe(1.5);
+    });
+
+    test('should throw error when square root of negative number', () => {
+      expect(() => squareRoot(-4)).toThrow('Cannot calculate square root of a negative number');
+    });
+
+    test('should throw error with large negative number', () => {
+      expect(() => squareRoot(-100)).toThrow('Cannot calculate square root of a negative number');
+    });
+
+    test('should square root of very large number', () => {
+      expect(squareRoot(1000000)).toBe(1000);
+    });
+
+    test('should square root of very small positive number', () => {
+      expect(squareRoot(0.0001)).toBe(0.01);
+    });
+
+    test('should maintain precision with square root', () => {
+      expect(squareRoot(3)).toBeCloseTo(1.732, 3);
     });
   });
 });

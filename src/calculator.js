@@ -1,10 +1,13 @@
 /**
  * Calculator Module - Node.js CLI Calculator
- * Supports the following basic arithmetic operations:
+ * Supports the following arithmetic operations:
  * - Addition: Add two or more numbers together
  * - Subtraction: Subtract one or more numbers from the first number
  * - Multiplication: Multiply two or more numbers together
  * - Division: Divide numbers with error handling for division by zero
+ * - Modulo: Get the remainder of a division operation
+ * - Power: Raise a number to a power (exponentiation)
+ * - Square Root: Calculate the square root of a number
  */
 
 /**
@@ -51,9 +54,49 @@ function divide(first, ...numbers) {
   }, first);
 }
 
+/**
+ * Returns the remainder of a divided by b
+ * @param {number} a - The dividend
+ * @param {number} b - The divisor
+ * @returns {number} The remainder of a divided by b
+ * @throws {Error} If b is zero
+ */
+function modulo(a, b) {
+  if (b === 0) {
+    throw new Error('Modulo by zero is not allowed');
+  }
+  return a % b;
+}
+
+/**
+ * Raises a base number to a power (exponentiation)
+ * @param {number} base - The base number
+ * @param {number} exponent - The exponent
+ * @returns {number} The base raised to the exponent
+ */
+function power(base, exponent) {
+  return Math.pow(base, exponent);
+}
+
+/**
+ * Calculates the square root of a number
+ * @param {number} n - The number to find the square root of
+ * @returns {number} The square root of n
+ * @throws {Error} If n is negative
+ */
+function squareRoot(n) {
+  if (n < 0) {
+    throw new Error('Cannot calculate square root of a negative number');
+  }
+  return Math.sqrt(n);
+}
+
 module.exports = {
   add,
   subtract,
   multiply,
-  divide
+  divide,
+  modulo,
+  power,
+  squareRoot
 };
